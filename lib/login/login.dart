@@ -2,7 +2,10 @@ import 'dart:ui' as prefix0;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gulidai_flutter/bloc/login_bloc.dart';
 import 'package:gulidai_flutter/home/home.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
@@ -77,11 +80,20 @@ class _LoginState extends State<Login> {
                   color: Colors.transparent,
                   child: new Text("登录", style: new TextStyle(color: Colors.white)),
                   onPressed: () {
-                    Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext b) {
-                        return new Home();
-                      }
-                    ));
+                    if (_phoneController.text != '' && _validateCodeController.text != '') {
+                      LoginInfo _loginInfo = new LoginInfo();
+                      _loginInfo.phone = _phoneController.text;
+                      _loginInfo.code = _validateCodeController.text;
+                      Provider.of<LoginBloc>(context).addLoginInfo(_loginInfo);
+
+                      _setLoginStatus(_phoneController.text);
+
+                      Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (BuildContext b) {
+                          return new Home();
+                        }
+                      ));
+                    }
                   },
                 )
               )
@@ -90,5 +102,12 @@ class _LoginState extends State<Login> {
         ]
       )
     );
+  }
+
+  _setLoginStatus(String phone) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('loginStatus', true);
+    sharedPreferences.setString('phone', phone);
+    print('设置登录状态为true');
   }
 }

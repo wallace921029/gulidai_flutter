@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gulidai_flutter/home/borrow.dart';
+import 'package:gulidai_flutter/borrow/borrow.dart';
+import 'package:gulidai_flutter/login/login.dart';
+import 'package:gulidai_flutter/my/my.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Home extends StatefulWidget {
@@ -16,7 +19,19 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _list.addAll([new Borrow(), new Text("我的")]);
+    _getLoginStatus();
+    _list.addAll([new Borrow(), new MyPage()]);
+  }
+
+  _getLoginStatus() async {
+    SharedPreferences sharedPreferences =  await SharedPreferences.getInstance();
+    bool loginStatus = sharedPreferences.getBool('loginStatus');
+    if (loginStatus == null) {
+      print('未检测到登录状态');
+      Navigator.of(context).push(new MaterialPageRoute(
+        builder: (BuildContext context) => new Login()
+      ));
+    }
   }
 
   @override
@@ -30,13 +45,14 @@ class _HomeState extends State<Home> {
         items: [
           new BottomNavigationBarItem(
             icon: new Icon(Icons.ac_unit),
-            title: new Text("借钱")
+            title: new Text('借钱')
           ),
           new BottomNavigationBarItem(
             icon: new Icon(Icons.person),
-            title: new Text("我的")
+            title: new Text('我的')
           )
         ],
+        currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
             _currentIndex = index;
