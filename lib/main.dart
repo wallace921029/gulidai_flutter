@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         title: '谷粒贷',
         theme: ThemeData(
           primarySwatch: Colors.orange,
+          splashColor: Colors.transparent
         ),
         home: new Home(),
         debugShowCheckedModeBanner: false,
