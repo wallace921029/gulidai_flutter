@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gulidai_flutter/person_authentication/person_authentication.dart';
 
 class Borrow extends StatefulWidget {
   Borrow({Key key}) : super(key: key);
@@ -10,7 +11,6 @@ class Borrow extends StatefulWidget {
 class _BorrowState extends State<Borrow> {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     return new Column(
       children: <Widget>[
         // 图片
@@ -78,7 +78,11 @@ class _BorrowState extends State<Borrow> {
             width: ScreenUtil().setWidth(700),
             child: new Image.asset("assets/images/gulidai3.png", fit: BoxFit.cover)
           ),
-          onTap: () {}
+          onTap: () {
+            Navigator.of(context).push(new MaterialPageRoute(
+              builder: (BuildContext context) => new PersonAuthentication()
+            ));
+          }
         )
       ]
     );
