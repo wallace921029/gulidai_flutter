@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gulidai_flutter/common_style/text_style.dart';
 
-class AddBankCard extends StatefulWidget {
-  AddBankCard({Key key}) : super(key: key);
+class BorrowMoney extends StatefulWidget {
+  BorrowMoney({Key key}) : super(key: key);
 
-  _AddBankCardState createState() => _AddBankCardState();
+  _BorrowMoneyState createState() => _BorrowMoneyState();
 }
 
-class _AddBankCardState extends State<AddBankCard> {
+class _BorrowMoneyState extends State<BorrowMoney> {
   String _use = '个人日常消费';
 
   @override
@@ -16,7 +17,7 @@ class _AddBankCardState extends State<AddBankCard> {
     return new Scaffold(
       backgroundColor: new Color.fromRGBO(254, 249, 243, 1),
       appBar: new AppBar(
-        title: new Text('添加银行卡'),
+        title: new Text('借款'),
         backgroundColor: Colors.white,
       ),
       body: new Container(
@@ -37,21 +38,7 @@ class _AddBankCardState extends State<AddBankCard> {
                       title: new Text('借款金额'),
                       trailing: new Container(
                         width: 100,
-                        child: new TextField(
-                          decoration: new InputDecoration(
-                            hintText: '输入借款金额',
-                            hintStyle: new TextStyle(fontSize: 12),
-                            focusedBorder: new OutlineInputBorder(borderSide: BorderSide.none),
-                            enabledBorder: new OutlineInputBorder(borderSide: BorderSide.none),
-                            border: new OutlineInputBorder(borderSide: BorderSide.none),
-                          ),
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.end,
-                          style: new TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
+                        child: new NormalTextField(hintText: '输入借款金额'),
                       ),
                     ),
                     new Divider(height: 0),

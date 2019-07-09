@@ -48,9 +48,12 @@ class _MyPageState extends State<MyPage> {
               onPressed: () async {
                 SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
                 sharedPreferences.remove('loginStatus');
-                Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => new Login()
-                ));
+                Navigator.of(context).pushAndRemoveUntil(
+                  new MaterialPageRoute(
+                    builder: (BuildContext context) => new Login()
+                  ),
+                  (route) => false,
+                );
               },
             )
           ],

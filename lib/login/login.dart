@@ -22,6 +22,7 @@ class _LoginState extends State<Login> {
     // 依据6s的尺寸
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     return new Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.white,
       body: new Column(
         children: <Widget>[
@@ -88,11 +89,14 @@ class _LoginState extends State<Login> {
 
                       _setLoginStatus(_phoneController.text);
 
-                      Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext b) {
-                          return new Home();
-                        }
-                      ));
+                      Navigator.of(context).pushAndRemoveUntil(
+                        new MaterialPageRoute(
+                          builder: (BuildContext b) {
+                            return new Home();
+                          }
+                        ),
+                        (route) => false,
+                      );
                     }
                   },
                 )

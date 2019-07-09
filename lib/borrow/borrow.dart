@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gulidai_flutter/borrow/borrow_money.dart';
 import 'package:gulidai_flutter/person_authentication/person_authentication.dart';
 
 class Borrow extends StatefulWidget {
@@ -63,7 +64,11 @@ class _BorrowState extends State<Borrow> {
                         child: new FlatButton(
                           color: Colors.transparent,
                           child: new Text("去借钱", style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                          onPressed: () {}
+                          onPressed: () {
+                            Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (BuildContext context) => new BorrowMoney()
+                            ));
+                          }
                         )
                       )
                     ]

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gulidai_flutter/person_authentication/add_bank_card.dart';
+import 'package:gulidai_flutter/person_authentication/page_one.dart';
+import 'package:gulidai_flutter/person_authentication/page_three.dart';
+import 'package:gulidai_flutter/person_authentication/page_two.dart';
 
 class PersonAuthentication extends StatefulWidget {
   PersonAuthentication({Key key}) : super(key: key);
@@ -22,7 +24,7 @@ class _PersonAuthenticationState extends State<PersonAuthentication> {
         height: double.infinity,
         child: new SingleChildScrollView(
           child: new Container(
-            padding: new EdgeInsets.only(top: 40.0, bottom: 40.0),
+            padding: new EdgeInsets.only(top: 20.0, bottom: 20.0),
             decoration: new BoxDecoration(
               color: Colors.white,
               borderRadius: new BorderRadius.all(new Radius.circular(8.0)),
@@ -44,6 +46,11 @@ class _PersonAuthenticationState extends State<PersonAuthentication> {
                       new Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new PageOne()
+                    ));
+                  },
                 ),
                 new Divider(height: 0),
                 new ListTile(
@@ -59,7 +66,7 @@ class _PersonAuthenticationState extends State<PersonAuthentication> {
                   ),
                   onTap: () {
                     Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new AddBankCard()
+                      builder: (BuildContext context) => new PageTwo()
                     ));
                   },
                 ),
@@ -75,6 +82,11 @@ class _PersonAuthenticationState extends State<PersonAuthentication> {
                       new Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new PageThree()
+                    ));
+                  },
                 ),
                 new Divider(height: 0),
                 new ListTile(
@@ -82,13 +94,14 @@ class _PersonAuthenticationState extends State<PersonAuthentication> {
                   trailing: new Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      new Text('未认证', style: new TextStyle(
+                      new Text('未添加', style: new TextStyle(
                         color: Colors.grey
                       )),
                       new Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
                     ],
                   ),
                 ),
+                new Divider(height: 0),
               ],
             ),
           ),

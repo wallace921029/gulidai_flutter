@@ -28,9 +28,12 @@ class _HomeState extends State<Home> {
     bool loginStatus = sharedPreferences.getBool('loginStatus');
     if (loginStatus == null) {
       print('未检测到登录状态');
-      Navigator.of(context).push(new MaterialPageRoute(
-        builder: (BuildContext context) => new Login()
-      ));
+      Navigator.of(context).pushAndRemoveUntil(
+        new MaterialPageRoute(
+          builder: (BuildContext context) => new Login()
+        ),
+        (route) => false,
+      );
     }
   }
 
