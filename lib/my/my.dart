@@ -34,11 +34,16 @@ class _MyPageState extends State<MyPage> {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            StreamBuilder<LoginInfo>(
+            new StreamBuilder<LoginInfo>(
               stream: Provider.of<LoginBloc>(context).stream,
               initialData: Provider.of<LoginBloc>(context).loginInfo,
               builder: (BuildContext context, AsyncSnapshot<LoginInfo> snapshot) {
-                return  new Text('用户 $_phone 您好！');
+                if (snapshot.data.phone == null) {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => new Login()
+                  ));
+                }
+                return new Text('用户 ${snapshot.data.phone} 您好！');
               },
             ),
             new FlatButton(
@@ -54,6 +59,15 @@ class _MyPageState extends State<MyPage> {
                   ),
                   (route) => false,
                 );
+              },
+            ),
+            new FlatButton(
+              color: Colors.orange,
+              textColor: Colors.white,
+              child: new Text('修改登录信息'),
+              onPressed: () {
+                LoginInfo loginInfo = new LoginInfo(code: '102945', phone: '18814885940');
+                Provider.of<LoginBloc>(context).addLoginInfo(loginInfo);
               },
             )
           ],
